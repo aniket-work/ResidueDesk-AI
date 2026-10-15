@@ -1,0 +1,105 @@
+{
+  "facility_name": "North Wharf MRF PoC",
+  "loads": [
+    {
+      "load_id": "LD-101",
+      "supplier_id": "NW-FIBER-04",
+      "commodity": "occ",
+      "net_weight_lb": 18420,
+      "residue_percent": 3.2,
+      "moisture_percent": 8.0,
+      "spot_check_notes": "dry gaylords, little loose film",
+      "received_at": "2026-10-14T06:12:00"
+    },
+    {
+      "load_id": "LD-102",
+      "supplier_id": "NW-FIBER-11",
+      "commodity": "occ",
+      "net_weight_lb": 22110,
+      "residue_percent": 9.4,
+      "moisture_percent": 11.0,
+      "spot_check_notes": "pizza boxes mixed into the bales",
+      "received_at": "2026-10-14T06:28:00"
+    },
+    {
+      "load_id": "LD-103",
+      "supplier_id": "NW-FIBER-11",
+      "commodity": "occ",
+      "net_weight_lb": 15680,
+      "residue_percent": 16.8,
+      "moisture_percent": 22.5,
+      "spot_check_notes": "rain-soaked bales, visible food residue",
+      "received_at": "2026-10-14T06:41:00"
+    },
+    {
+      "load_id": "LD-104",
+      "supplier_id": "HARBOR-PET-02",
+      "commodity": "pet",
+      "net_weight_lb": 8420,
+      "residue_percent": 2.1,
+      "moisture_percent": 1.4,
+      "spot_check_notes": "clear bottles, caps mostly off",
+      "received_at": "2026-10-14T07:02:00"
+    },
+    {
+      "load_id": "LD-105",
+      "supplier_id": "HARBOR-PET-02",
+      "commodity": "pet",
+      "net_weight_lb": 9104,
+      "residue_percent": 7.6,
+      "moisture_percent": 2.0,
+      "spot_check_notes": "label sleeve heavy, still bottle-shaped",
+      "received_at": "2026-10-14T07:18:00"
+    },
+    {
+      "load_id": "LD-106",
+      "supplier_id": "DOCK-HDPE-7",
+      "commodity": "hdpe",
+      "net_weight_lb": 7340,
+      "residue_percent": 3.1,
+      "moisture_percent": 1.1,
+      "spot_check_notes": "battery pack visible in the third gaylord",
+      "received_at": "2026-10-14T07:33:00"
+    },
+    {
+      "load_id": "LD-107",
+      "supplier_id": "CULLET-EAST-1",
+      "commodity": "glass",
+      "net_weight_lb": 12880,
+      "residue_percent": 4.4,
+      "moisture_percent": 0.6,
+      "spot_check_notes": "ceramic mug fragments in the cullet sample",
+      "received_at": "2026-10-14T07:49:00"
+    },
+    {
+      "load_id": "LD-108",
+      "supplier_id": "NW-FIBER-04",
+      "commodity": "mixed_paper",
+      "net_weight_lb": 14110,
+      "residue_percent": 6.2,
+      "moisture_percent": 19.4,
+      "spot_check_notes": "office mix, damp from the dock",
+      "received_at": "2026-10-14T08:05:00"
+    },
+    {
+      "load_id": "LD-109",
+      "supplier_id": "FILM-BAY-3",
+      "commodity": "ldpe_film",
+      "net_weight_lb": 4680,
+      "residue_percent": 28.0,
+      "moisture_percent": 4.2,
+      "spot_check_notes": "loose paper and strapping throughout",
+      "received_at": "2026-10-14T08:22:00"
+    },
+    {
+      "load_id": "LD-110",
+      "supplier_id": "NW-FIBER-09",
+      "commodity": "occ",
+      "net_weight_lb": 280,
+      "residue_percent": 2.8,
+      "moisture_percent": 7.5,
+      "spot_check_notes": "partial bale, scale ticket looks short",
+      "received_at": "2026-10-14T08:36:00"
+    }
+  ]
+}

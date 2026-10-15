@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>ResidueDesk-AI</title>
+  <style>
+    body { font-family: "Segoe UI", sans-serif; background: #0f1622; color: #e3edf7; margin: 0; }
+    main { max-width: 980px; margin: 32px auto; padding: 0 20px; }
+    h1 { font-weight: 600; font-size: 28px; margin-bottom: 4px; }
+    p.lead { color: #8aa2bd; }
+    button { background: #2f9e6b; color: #04140c; border: 0; border-radius: 8px; padding: 10px 16px; font-weight: 600; cursor: pointer; }
+    .cards { display: flex; gap: 12px; margin: 20px 0; }
+    .card { flex: 1; background: #162335; border: 1px solid #304a6e; border-radius: 12px; padding: 14px; }
+    .card span { display: block; color: #a1b8d4; font-size: 12px; letter-spacing: 0.04em; }
+    .card strong { font-size: 28px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid #25354c; font-size: 14px; }
+    pre { white-space: pre-wrap; background: #14191f; padding: 16px; border-radius: 12px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>ResidueDesk-AI</h1>
+    <p class="lead">North Wharf MRF PoC — local shift desk</p>
+    <button id="run" type="button">Run sample shift</button>
+    <div class="cards" id="cards"></div>
+    <table id="grid"></table>
+    <pre id="brief"></pre>
+  </main>
+  <script>
+    const colors = { accept: "#2f9e6b", resort: "#e0a100", divert: "#e07a3d", reject: "#d64545" };
+    document.getElementById("run").addEventListener("click", async () => {
+      const response = await fetch("/api/triage/sample", { method: "POST" });
+      const report = await response.json();
+      const cards = document.getElementById("cards");
+      cards.innerHTML = "";
+      ["accept", "resort", "divert", "reject"].forEach((key) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = "<span>" + key.toUpperCase() + "</span><strong style='color:" + colors[key] + "'>" + report.counts[key] + "</strong>";
+        cards.appendChild(card);
+      });
+      const rows = report.decisions.map((item) =>
+        "<tr><td>" + item.load_id + "</td><td>" + item.commodity + "</td><td>" + item.residue_percent + "</td><td>" + item.disposition + "</td><td>" + item.line_assignment + "</td></tr>"
+      ).join("");
+      document.getElementById("grid").innerHTML = "<tr><th>Load</th><th>Commodity</th><th>Residue</th><th>Disposition</th><th>Line</th></tr>" + rows;
+      document.getElementById("brief").textContent = report.shift_brief;
+    });
+  </script>
+</body>
+</html>
