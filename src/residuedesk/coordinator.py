@@ -11,6 +11,7 @@ from src.residuedesk.agents import (
 )
 from src.residuedesk.rules import LINE_FOR, SPEC_CARDS
 from src.residuedesk.schemas import Disposition, InboundLoad, LoadDecision, ShiftReport
+from src.residuedesk.semantic import project_load
 
 SEVERITY = {
     Disposition.REJECT: 0,
@@ -23,6 +24,13 @@ SEVERITY = {
 def decide_load(load: InboundLoad) -> LoadDecision:
     trace: list[str] = []
     flags = intake_agent(load, trace)
+    projected = project_load(load)
+    trace.append(
+        "semantic: entity=Load "
+        f"measures={','.join(projected.measures)} "
+        f"commodity={projected.commodity.value} "
+        f"card={projected.metrics.card_id}"
+    )
     prohibited = residue_scout(load, trace)
     band, label, card_id, moisture_breach = commodity_grader(load, trace)
     disposition, reasons = line_router(

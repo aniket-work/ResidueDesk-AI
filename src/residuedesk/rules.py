@@ -1,57 +1,22 @@
-"""Experimental commodity specs I chose for this PoC. Not a mill contract."""
+"""Narrative spec cards. Numeric metrics live on the semantic model."""
 
 from __future__ import annotations
 
 from src.residuedesk.schemas import Commodity
+from src.residuedesk.semantic import COMMODITY_METRICS
 
-FIBER = {Commodity.OCC, Commodity.MIXED_PAPER}
+FIBER = {item.commodity for item in COMMODITY_METRICS.values() if item.fiber}
 
-# accept_max: residue at or below this can land on the primary tip line.
-# resort_max: residue above accept and at or below this goes to the QC bay.
-# anything above resort_max is heavy residue and diverts to the bunker.
+# Built from the semantic model so the grader and the model cannot drift.
 SPECS: dict[Commodity, dict[str, float | str]] = {
-    Commodity.OCC: {
-        "accept_max": 5.0,
-        "resort_max": 12.0,
-        "moisture_cap": 18.0,
-        "label": "OCC fiber",
-        "card_id": "SPEC-OCC-01",
-    },
-    Commodity.MIXED_PAPER: {
-        "accept_max": 8.0,
-        "resort_max": 18.0,
-        "moisture_cap": 16.0,
-        "label": "Mixed paper",
-        "card_id": "SPEC-MXP-01",
-    },
-    Commodity.PET: {
-        "accept_max": 4.0,
-        "resort_max": 10.0,
-        "moisture_cap": 8.0,
-        "label": "PET bottles",
-        "card_id": "SPEC-PET-01",
-    },
-    Commodity.HDPE: {
-        "accept_max": 4.0,
-        "resort_max": 10.0,
-        "moisture_cap": 8.0,
-        "label": "HDPE natural",
-        "card_id": "SPEC-HDPE-01",
-    },
-    Commodity.GLASS: {
-        "accept_max": 6.0,
-        "resort_max": 15.0,
-        "moisture_cap": 12.0,
-        "label": "Glass cullet",
-        "card_id": "SPEC-GLS-01",
-    },
-    Commodity.LDPE_FILM: {
-        "accept_max": 10.0,
-        "resort_max": 25.0,
-        "moisture_cap": 12.0,
-        "label": "LDPE film",
-        "card_id": "SPEC-FILM-01",
-    },
+    commodity: {
+        "accept_max": metrics.accept_max,
+        "resort_max": metrics.resort_max,
+        "moisture_cap": metrics.moisture_cap,
+        "label": metrics.label,
+        "card_id": metrics.card_id,
+    }
+    for commodity, metrics in COMMODITY_METRICS.items()
 }
 
 SPEC_CARDS: dict[str, str] = {

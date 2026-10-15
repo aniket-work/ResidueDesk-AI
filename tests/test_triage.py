@@ -82,6 +82,21 @@ def test_underweight_clean_ticket_goes_to_resort() -> None:
     assert "underweight_ticket" in report.decisions[0].reasons
 
 
+def test_semantic_projection_binds_measures() -> None:
+    from src.residuedesk.semantic import MEASURES, RELATIONSHIPS, project_load
+
+    projected = project_load(_load(residue_percent=3.2, moisture_percent=8.0, net_weight_lb=18420))
+    assert {item.name for item in MEASURES} == {
+        "NetWeightLb",
+        "ResiduePercent",
+        "MoisturePercent",
+    }
+    assert projected.measures["ResiduePercent"] == 3.2
+    assert projected.metrics.card_id == "SPEC-OCC-01"
+    assert projected.metrics.fiber is True
+    assert any(item.name == "LoadCommodity" for item in RELATIONSHIPS)
+
+
 def test_sample_file_counts() -> None:
     payload = json.loads(SAMPLE.read_text(encoding="utf-8"))
     loads = [InboundLoad.model_validate(item) for item in payload["loads"]]

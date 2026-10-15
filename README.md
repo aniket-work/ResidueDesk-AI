@@ -2,7 +2,7 @@
 
 ### How I Turned Inbound Bale Tickets into Accept, Resort, or Divert Calls
 
-ResidueDesk-AI is a local multi-agent shift desk for a materials recovery facility. It reads inbound load tickets on a laptop, runs five specialist steps, and writes a shift brief before anything hits the tip floor. The rules are experimental thresholds I chose for this proof of concept. They are not a mill contract and not a claim about how a real facility should run.
+ResidueDesk-AI is a local multi-agent shift desk for a materials recovery facility. The semantic model in `src/residuedesk/semantic.py` is the layer the desk reads: a Load entity, Commodity and Supplier dimensions, three measures (`NetWeightLb`, `ResiduePercent`, `MoisturePercent`), and commodity metric bindings. Agents do not invent those definitions. They project each ticket onto that model, then write an accept, resort, divert, or reject brief. The thresholds are experimental. They are not a mill contract.
 
 ![Cover](images/title-animation.gif)
 
@@ -45,6 +45,7 @@ ResidueDesk-AI/
 ├── requirements.txt
 ├── src/residuedesk/
 │   ├── schemas.py
+│   ├── semantic.py
 │   ├── rules.py
 │   ├── agents.py
 │   ├── coordinator.py
